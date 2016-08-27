@@ -4,9 +4,27 @@
     <div class="search cf">
         <h2>Search Checkins</h2>
         <input type="text" ng-model="query" placeholder="Search for users">
-    </div>
+        <div class="formgroup">
+            <span class="label">by: </span>
+            <select ng-model="order">
+                <option value="firstname">First Name</option>
+                <option value="lastname">Last Name</option>
+                <option value="date">Date</option>
+            </select>
+        </div> <!--formgroup-->
+        <div class="formgroup">
+            <input id="dirascending" type="radio" ng-model="direction" name="direction">
+            <label for="dirascending">Ascending</label> &nbsp;
+            <input id="dirdescending" type="radio" ng-model="direction" name="direction" value="reverse">
+            <label for="dirdescending">Descending</label>
+        </div><!--formgroup-->
+        <div ng-show="currentUser" class="buttons cf">
+            <button ng-hide="recordId" class="btn btn-pick" ng-click="pickRandom()">Pick Random</button>
+            <button ng-show="recordId" class="btn btn-pick" ng-click="recordId=''">Reset</button>
+        </div>
+    </div><!--search-->
     <ul class="userlist cf">
-        <li ng-repeat="checkin in checkins | filter: query">
+        <li ng-repeat="checkin in checkins |orderBy: order: direction| filter: {$id:recordId, $:query}">
             <div class="checkin">
                 <div class="buttons" ng-show="currentUser">
                     <button class=" btn btn-delete tooltip" ng-click="deleteCheckin(checkin.$id)">
