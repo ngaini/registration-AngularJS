@@ -29,7 +29,7 @@ myApp.factory('Authentication',['$rootScope','$firebaseAuth','$location', '$fire
                 password: user.password
             }).then(function(regUser){
                 //send user to success page
-                $location.path('/success');
+                $location.path('/meetings');
             }).catch(function(error){
                 $rootScope.message = error.message ;
 

@@ -1,4 +1,4 @@
-var myApp = angular.module  ('myApp',['ngRoute','firebase']).constant('FIREBASE_URL', 'https://registration1851.firebaseio.com/');
+var myApp = angular.module  ('myApp',['ngRoute','firebase']).constant('FIREBASE_URL', 'https://angulardata78.firebaseio.com/');
 
 
 myApp.run(['$rootScope','$location', function($rootScope, $location){
@@ -21,9 +21,17 @@ myApp.config(['$routeProvider',function($routeProvider){
             templateUrl: 'views/register.html',
             controller: 'RegistrationController'
         }).
-        when('/success',{
-            templateUrl: 'views/success.html',
-            controller: 'SuccessController',
+        when('/checkins/:uId/:mId',{
+            templateUrl: 'views/checkins.html',
+            controller: 'CheckInsController'
+        }).
+        when('/checkins/:uId/:mId/checkinsList',{
+            templateUrl: 'views/checkinslist.html',
+            controller: 'CheckInsController'
+        }).
+        when('/meetings',{
+            templateUrl: 'views/meetings.html',
+            controller: 'MeetingsController',
             resolve: {
                 currentAuth: function (Authentication) {
                     return Authentication.requireAuth();
